@@ -1,30 +1,30 @@
-# Azure Eventgrid Event Driver
+# Cloudevents Event Driver
 
-This driver enables native eventgrid/cloudevents support within Dispatch
+This driver enables native cloudevents (~2.0) support within Dispatch
 
 ## Installation
 
-1. Register the eventgrid driver type (the expose option means this is a "push" driver):
+1. Register the cloudevents driver type (the expose option means this is a "push" driver):
 
     ```
-    $ dispatch create eventdrivertype eventgrid dispatchframework/events-eventgrid:0.0.1 --expose
-    Created event driver type: eventgrid
+    $ dispatch create eventdrivertype cloudevents dispatchframework/dispatch-events-cloudevents:kubecon-demo --expose
+    Created event driver type: cloudevents
     ```
 
 2. Create an event driver from the new type:
 
     ```
-    $ dispatch create eventdriver eventgrid --name eventgrid
-    Created event driver: eventgrid
+    $ dispatch create eventdriver cloudevents-demo --name cloudevents
+    Created event driver: cloudevents-demo
     ```
 
 3. Get the URL for the event driver.  This is the URL that the eventgrid subscriber (in Azure) will push to:
 
     ```
     $ dispatch get eventdriver
-        NAME    |   TYPE    | STATUS | SECRETS | CONFIG |                  URL                    | REASON
+            NAME       |     TYPE    | STATUS | SECRETS | CONFIG |                  URL                    | REASON
     -------------------------------------------------------------------------------------------------------
-      eventgrid | eventgrid | READY  |         |        | https://example.com/driver/dispatch/... |
+      cloudevents-demo | cloudevents | READY  |         |        | https://example.com/driver/dispatch/... |
     -------------------------------------------------------------------------------------------------------
     ```
 
@@ -53,9 +53,9 @@ This driver enables native eventgrid/cloudevents support within Dispatch
         $ dispatch create function echo --image nodejs echo.js
         Created function: echo
         ```
-    - Subscribe to the `Microsoft.Storage.BlobCreated` event:
+    - Subscribe to the `word.found.noun` event:
         ```
-        $ dispatch create subscription echo --event-type "Microsoft.Storage.BlobCreated"
+        $ dispatch create subscription echo --event-type "word.found.noun"
         created subscription: measured-caribou-626480
         ```
 

@@ -1,0 +1,60 @@
+kind: DriverType
+image: dispatchframework/dispatch-events-cloudevents:kubecon-demo
+expose: true
+name: cloudevents
+---
+kind: Driver
+name: cloudevents-demo-001
+expose: true
+type: cloudevents
+---
+kind: Subscription
+eventtype: word.found.adjective
+function: madlibs
+name: madlibs-adjective
+---
+kind: Subscription
+eventtype: word.found.adverb
+function: madlibs
+name: madlibs-adverb
+---
+kind: Subscription
+eventtype: word.found.exclamation
+function: madlibs
+name: madlibs-exclamation
+---
+kind: Subscription
+eventtype: word.found.noun
+function: madlibs
+name: madlibs-noun
+---
+kind: Subscription
+eventtype: word.found.pluralnoun
+function: madlibs
+name: madlibs-pluralnoun
+---
+kind: Subscription
+eventtype: word.found.verb
+function: madlibs
+name: madlibs-verb
+---
+kind: Subscription
+eventtype: word.found.name
+function: madlibs
+name: madlibs-name
+---
+kind: Subscription
+eventtype: word.found.verbing
+function: madlibs
+name: madlibs-verbing
+---
+kind: Subscription
+eventtype: word.found.animal
+function: madlibs
+name: madlibs-animal
+---
+kind: Subscription
+eventtype: word.found.color
+function: madlibs
+name: madlibs-color
+---

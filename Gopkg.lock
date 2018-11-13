@@ -137,6 +137,7 @@
   version = "v1.5.0"
 
 [[projects]]
+  branch = "solo"
   name = "github.com/vmware/dispatch"
   packages = [
     "pkg/entity-store",
@@ -146,7 +147,7 @@
     "pkg/trace",
     "pkg/utils"
   ]
-  revision = "8ccce302fe817eab97f2926173ada776ec6f9b0c"
+  revision = "3f33ee737dfd3d9d09a21d184b9efa59503ca897"
 
 [[projects]]
   branch = "master"
@@ -172,8 +173,8 @@
 [[projects]]
   name = "gopkg.in/go-playground/validator.v9"
   packages = ["."]
-  revision = "f28cb45dc0f0f406ba2015cdb59a5203ad220bc2"
-  version = "v9.17.1"
+  revision = "1fa3c8d6336562f0a3f95c73593ee2b57ff4da11"
+  version = "v9.23.0"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -184,6 +185,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "06644981d047b15954e1e3f959061319085f7c9d44380dbbfb90b6c6f2abff5b"
+  inputs-digest = "41945baa7c0366756bf776ba2889457c5a44f2f53b08e5e65a1034d8de252456"
   solver-name = "gps-cdcl"
   solver-version = 1

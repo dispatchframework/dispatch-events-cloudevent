@@ -14,7 +14,7 @@ This driver enables native cloudevents (~2.0) support within Dispatch
 2. Create an event driver from the new type:
 
     ```
-    $ dispatch create eventdriver cloudevents-demo --name cloudevents
+    $ dispatch create eventdriver cloudevents --name cloudevents
     Created event driver: cloudevents-demo
     ```
 

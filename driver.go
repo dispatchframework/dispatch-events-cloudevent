@@ -10,6 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	cloudevent "github.com/cloudevents/sdk-go"
 	"github.com/cloudevents/sdk-go/v02"
 	"github.com/vmware/dispatch/pkg/events"
 	"github.com/vmware/dispatch/pkg/events/driverclient"
@@ -35,12 +36,24 @@ var dispatchEndpoint = flag.String("dispatch-api-endpoint", "localhost:8080", "d
 var port = flag.Int("port", 80, "Port to listen on")
 var sharedSecret = flag.String("shared-secret", "", "A token or shared secret that the client should pass")
 
+// (not required) sink will be automatically set when using with knative container source. Note: this flag will supersede
+// gateway.
+var sink = flag.String("sink", "", "knative sink url")
+
 func getDriverClient() driverclient.Client {
 	if *dryRun {
 		return nil
 	}
 	token := os.Getenv(driverclient.AuthToken)
-	client, err := driverclient.NewHTTPClient(driverclient.WithGateway(*dispatchEndpoint), driverclient.WithToken(token))
+	var client driverclient.Client
+	var err error
+	// If sink is set use the sink url and ignore gateway
+	if *sink != "" {
+		log.Printf("Using sink URL %s", *sink)
+		client, err = driverclient.NewHTTPClient(driverclient.WithURL(*sink), driverclient.WithToken(token))
+	} else {
+		client, err = driverclient.NewHTTPClient(driverclient.WithGateway(*dispatchEndpoint), driverclient.WithToken(token))
+	}
 	if err != nil {
 		log.Fatalf("Error when creating the events client: %s", err.Error())
 	}
@@ -79,7 +92,7 @@ func main() {
 
 		dispatchEvent := &events.CloudEvent{
 			EventType:          v02Event.Type,
-			CloudEventsVersion: "0.1",
+			CloudEventsVersion: cloudevent.Version01,
 			ContentType:        v02Event.ContentType,
 			EventID:            v02Event.ID,
 			Source:             v02Event.Source,
